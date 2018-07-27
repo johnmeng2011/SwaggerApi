@@ -10,6 +10,7 @@ import com.swagger.swaggerapi.task.BalanceTestResult;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  *
  * @author Jun.Meng
  */
+@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ValidateBracketsTest {
