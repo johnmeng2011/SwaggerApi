@@ -9,10 +9,10 @@ package com.swagger.swaggerapi.task;
  *
  * @author Jun.Meng
  */
-public class BalanceTestResult implements SwaggerTaskResult<BalanceTestResult> {
+public class BalanceTestResult  {
     
-    private String input;
-    private String isBalanced;
+    private final String input;
+    private final String isBalanced;
 
     public String getInput() {
         return input;
@@ -22,8 +22,10 @@ public class BalanceTestResult implements SwaggerTaskResult<BalanceTestResult> {
         return isBalanced;
     }
 
-    public BalanceTestResult(String input, String isBalanced){
-        input= input;
-        isBalanced = isBalanced;
+    public BalanceTestResult(String input, String isBalanced) {
+        this.input = input;
+        this.isBalanced = isBalanced;
     }
+
+
 }

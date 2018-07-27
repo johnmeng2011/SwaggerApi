@@ -9,13 +9,14 @@ package com.swagger.swaggerapi.task;
  *
  * @author Jun.Meng
  */
-public class ItemValidationError implements SwaggerTaskResult<ItemValidationError> {
-    
-    private ErrorDetails details;
-    private String name;
+public class ItemValidationError  {
 
-    public ItemValidationError(ErrorDetails details){
-        details = details;
+    private final ErrorDetails details;
+    private final String name;
+
+    public ItemValidationError(ErrorDetails details, String name) {
+        this.details = details;
+        this.name = name;
     }
 
     public ErrorDetails getDetails() {
@@ -25,7 +26,5 @@ public class ItemValidationError implements SwaggerTaskResult<ItemValidationErro
     public String getName() {
         return name;
     }
-   
+
 }
-
-

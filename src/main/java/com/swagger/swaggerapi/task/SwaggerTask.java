@@ -7,7 +7,6 @@ package com.swagger.swaggerapi.task;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,18 +20,16 @@ import org.springframework.web.bind.annotation.RestController;
 @ResponseBody
 public class SwaggerTask {
 
-    private SwaggerTaskResult result;
-
     @RequestMapping(value = "/tasks/validateBrackets")
     public ResponseEntity validateBrackets(@RequestParam(name = "input", required = true, defaultValue = "{[()]}") String input) {
-        
+
         char[] tmp = input.toCharArray();
-        
-        if(tmp.length==0 || tmp.length >50){
-            result = new ItemValidationError(new ErrorDetails("params", "text", "Must be between 1 and 50 chars long", input));
-            return new ResponseEntity(result, HttpStatus.INTERNAL_SERVER_ERROR);
+
+        if (tmp.length == 0 || tmp.length > 50) {
+            ItemValidationError result = new ItemValidationError(new ErrorDetails("params", "text", "Must be between 1 and 50 chars long", input), "ValidationError");
+            return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
         }
-        
+
         boolean isBalanced = true;
         Paren p = new Paren(0);
         Bracket b = new Bracket(0);
@@ -49,7 +46,7 @@ public class SwaggerTask {
                         isBalanced = false;
                         break;
                     }
-                    if(b.getCount()!=0 || p.getCount()!=0){
+                    if (b.getCount() != 0 || p.getCount() != 0) {
                         isBalanced = false;
                     }
                     break;
@@ -62,7 +59,7 @@ public class SwaggerTask {
                         isBalanced = false;
                         break;
                     }
-                    if(c.getCount()!=0 || p.getCount() != 0 ){
+                    if (c.getCount() != 0 || p.getCount() != 0) {
                         isBalanced = false;
                     }
                     break;
@@ -75,8 +72,8 @@ public class SwaggerTask {
                         isBalanced = false;
                         break;
                     }
-                    if( b.getCount()!=0 || c.getCount()!=0){
-                        isBalanced= false;
+                    if (b.getCount() != 0 || c.getCount() != 0) {
+                        isBalanced = false;
                     }
                     break;
                 default:
@@ -88,20 +85,25 @@ public class SwaggerTask {
             isBalanced = false;
         }
         if (isBalanced) {
-            return new ResponseEntity(new BalanceTestResult(input,"true"),HttpStatus.OK);
-             
+            return new ResponseEntity(new BalanceTestResult(input, "true"), HttpStatus.OK);
+
         } else {
-            ResponseEntity entity =  new ResponseEntity(new Temp("false"),HttpStatus.OK);
-            return entity;
+            return new ResponseEntity(new BalanceTestResult(input, "false"), HttpStatus.OK);
+
         }
     }
 }
 
-class Paren {
+interface Symbol {
+
+}
+
+class Paren implements Symbol {
 
     private int count;
+
     public Paren(int count) {
-        count = count;
+        this.count = count;
     }
 
     public int getCount() {
@@ -118,12 +120,14 @@ class Paren {
 
 }
 
-class Bracket {
+
+
+class Bracket implements Symbol {
 
     private int count;
 
     public Bracket(int count) {
-        count = count;
+        this.count = count;
     }
 
     public int getCount() {
@@ -139,12 +143,12 @@ class Bracket {
     }
 }
 
-class Curly {
+class Curly implements Symbol{
 
     private int count;
 
     public Curly(int count) {
-        count = count;
+        this.count = count;
     }
 
     public int getCount() {
@@ -158,19 +162,7 @@ class Curly {
     public void decrease() {
         count--;
     }
+
 }
 
-class Temp{
-    private String attr;
-    public Temp(String attr){
-        attr = attr;
-    }
 
-    public String getAttr() {
-        return attr;
-    }
-
-    public void setAttr(String attr) {
-        this.attr = attr;
-    }
-}

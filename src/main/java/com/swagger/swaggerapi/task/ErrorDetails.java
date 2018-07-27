@@ -27,16 +27,18 @@ public class ErrorDetails{
         return value;
     }
     
-    private String location;
-    private String param;
-    private String msg;
-    private String value;
+    private final String location;
+    private final String param;
+    private final String msg;
+    private final String value;
 
-    public ErrorDetails(String location, String param, String msg, String value){
-        location=location;
-        param = param;
-        msg=msg;
-        value = value;
+    public ErrorDetails(String location, String param, String msg, String value) {
+        this.location = location;
+        this.param = param;
+        this.msg = msg;
+        this.value = value;
     }
+
+   
     
 }
