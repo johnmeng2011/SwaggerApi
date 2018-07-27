@@ -11,15 +11,15 @@ package com.swagger.swaggerapi.task;
  */
 public class ItemValidationError  {
 
-    private final ErrorDetails details;
+    private final ErrorDetails[] details;
     private final String name;
 
-    public ItemValidationError(ErrorDetails details, String name) {
+    public ItemValidationError(ErrorDetails[] details, String name) {
         this.details = details;
         this.name = name;
     }
 
-    public ErrorDetails getDetails() {
+    public ErrorDetails[] getDetails() {
         return details;
     }
 

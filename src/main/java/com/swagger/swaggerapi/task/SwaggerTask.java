@@ -5,6 +5,9 @@
  */
 package com.swagger.swaggerapi.task;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.Stack;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,59 +24,49 @@ import org.springframework.web.bind.annotation.RestController;
 public class SwaggerTask {
 
     @RequestMapping(value = "/tasks/validateBrackets")
-    public ResponseEntity validateBrackets(@RequestParam(name = "input", required = true, defaultValue = "{[()]}") String input) {
+    public ResponseEntity validateBrackets(@RequestParam(name = "input", required = true, defaultValue = "{[()]}") String input) throws UnsupportedEncodingException {
 
+        input = URLDecoder.decode(input, "UTF-8");
         char[] tmp = input.toCharArray();
 
         if (tmp.length == 0 || tmp.length > 50) {
-            ItemValidationError result = new ItemValidationError(new ErrorDetails("params", "text", "Must be between 1 and 50 chars long", input), "ValidationError");
+            ItemValidationError result = new ItemValidationError(new ErrorDetails[]{new ErrorDetails("params", "text", "Must be between 1 and 50 chars long", input)}, "ValidationError");
             return new ResponseEntity(result, HttpStatus.BAD_REQUEST);
         }
 
         boolean isBalanced = true;
-        Paren p = new Paren(0);
-        Bracket b = new Bracket(0);
-        Curly c = new Curly(0);
+        Stack symbolStack = new Stack();
 
         for (int i = 0; i < tmp.length; i++) {
             switch (tmp[i]) {
                 case '{':
-                    c.increase();
+                    symbolStack.push('{');
                     break;
                 case '}':
-                    c.decrease();
-                    if (c.getCount() < 0) {
+                    if ((char) symbolStack.peek() != '{') {
                         isBalanced = false;
-                        break;
-                    }
-                    if (b.getCount() != 0 || p.getCount() != 0) {
-                        isBalanced = false;
+                    } else {
+                        symbolStack.pop();
                     }
                     break;
                 case '[':
-                    b.increase();
+                    symbolStack.push('[');
                     break;
                 case ']':
-                    b.decrease();
-                    if (b.getCount() < 0) {
+                    if ((char) symbolStack.peek() != '[') {
                         isBalanced = false;
-                        break;
-                    }
-                    if (c.getCount() != 0 || p.getCount() != 0) {
-                        isBalanced = false;
+                    } else {
+                        symbolStack.pop();
                     }
                     break;
                 case '(':
-                    p.increase();
+                    symbolStack.push('(');
                     break;
                 case ')':
-                    p.decrease();
-                    if (p.getCount() < 0) {
+                    if ((char) symbolStack.peek() != '(') {
                         isBalanced = false;
-                        break;
-                    }
-                    if (b.getCount() != 0 || c.getCount() != 0) {
-                        isBalanced = false;
+                    } else {
+                        symbolStack.pop();
                     }
                     break;
                 default:
@@ -81,7 +74,7 @@ public class SwaggerTask {
             }
         }
 
-        if (p.getCount() != 0 || b.getCount() != 0 || c.getCount() != 0) {
+        if (!symbolStack.empty()) {
             isBalanced = false;
         }
         if (isBalanced) {
@@ -93,76 +86,3 @@ public class SwaggerTask {
         }
     }
 }
-
-interface Symbol {
-
-}
-
-class Paren implements Symbol {
-
-    private int count;
-
-    public Paren(int count) {
-        this.count = count;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void increase() {
-        count++;
-    }
-
-    public void decrease() {
-        count--;
-    }
-
-}
-
-
-
-class Bracket implements Symbol {
-
-    private int count;
-
-    public Bracket(int count) {
-        this.count = count;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void increase() {
-        count++;
-    }
-
-    public void decrease() {
-        count--;
-    }
-}
-
-class Curly implements Symbol{
-
-    private int count;
-
-    public Curly(int count) {
-        this.count = count;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void increase() {
-        count++;
-    }
-
-    public void decrease() {
-        count--;
-    }
-
-}
-
-
