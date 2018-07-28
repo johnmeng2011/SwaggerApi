@@ -12,6 +12,6 @@ import org.springframework.data.repository.CrudRepository;
  *
  * @author Jun.Meng
  */
-public interface MessageRepo extends CrudRepository<Message, Long>  {
+public interface MessageRepo extends CrudRepository<Message, Integer>  {
     
 }

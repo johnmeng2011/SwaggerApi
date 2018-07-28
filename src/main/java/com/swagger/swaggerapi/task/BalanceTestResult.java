@@ -22,10 +22,10 @@ public class BalanceTestResult  {
         return isBalanced;
     }
 
+
     public BalanceTestResult(String input, String isBalanced) {
         this.input = input;
         this.isBalanced = isBalanced;
     }
-
-
+    
 }

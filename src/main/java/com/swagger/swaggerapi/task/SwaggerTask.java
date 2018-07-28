@@ -43,7 +43,10 @@ public class SwaggerTask {
                     symbolStack.push('{');
                     break;
                 case '}':
-                    if ((char) symbolStack.peek() != '{') {
+                    if(symbolStack.empty()) {
+                        isBalanced= false;
+                    }
+                    else if ((char) symbolStack.peek() != '{') {
                         isBalanced = false;
                     } else {
                         symbolStack.pop();
@@ -53,7 +56,10 @@ public class SwaggerTask {
                     symbolStack.push('[');
                     break;
                 case ']':
-                    if ((char) symbolStack.peek() != '[') {
+                     if(symbolStack.empty()) {
+                        isBalanced= false;
+                    }
+                     else if ((char) symbolStack.peek() != '[') {
                         isBalanced = false;
                     } else {
                         symbolStack.pop();
@@ -63,7 +69,10 @@ public class SwaggerTask {
                     symbolStack.push('(');
                     break;
                 case ')':
-                    if ((char) symbolStack.peek() != '(') {
+                    if(symbolStack.empty()) {
+                        isBalanced= false;
+                    }
+                     else if ((char) symbolStack.peek() != '(') {
                         isBalanced = false;
                     } else {
                         symbolStack.pop();

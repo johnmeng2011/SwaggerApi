@@ -5,22 +5,22 @@
  */
 package com.swagger.swaggerapi.todo;
 
-import java.io.Serializable;
-
 /**
  *
  * @author Jun.Meng
  */
-public class CreateRequest implements Serializable{
-    private String text;
-
-    public CreateRequest() {
-    }
-
-    public CreateRequest(String text) {
-        this.text = text;
-    }
+public class UpdateRequest {
     
+    private String text;
+    private boolean isCompleted;
+
+    public UpdateRequest() {
+    }
+
+    public UpdateRequest(String text, boolean isCompleted) {
+        this.text = text;
+        this.isCompleted = isCompleted;
+    }
 
     public String getText() {
         return text;
@@ -29,5 +29,14 @@ public class CreateRequest implements Serializable{
     public void setText(String text) {
         this.text = text;
     }
+
+    public boolean isIsCompleted() {
+        return isCompleted;
+    }
+
+    public void setIsCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
+    
     
 }

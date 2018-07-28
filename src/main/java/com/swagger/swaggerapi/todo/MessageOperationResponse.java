@@ -18,6 +18,7 @@ public class MessageOperationResponse {
     private boolean isCompleted;
     private LocalDateTime createdAt;
 
+  
     public MessageOperationResponse(Integer id, String text, boolean isCompleted, LocalDateTime createdAt) {
         this.id = id;
         this.text = text;
@@ -25,6 +26,8 @@ public class MessageOperationResponse {
         this.createdAt = createdAt;
     }
 
+    public MessageOperationResponse(){}
+    
     public Integer getId() {
         return id;
     }
@@ -56,6 +59,4 @@ public class MessageOperationResponse {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-    
-    
 }

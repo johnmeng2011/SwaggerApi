@@ -22,6 +22,9 @@ public class Message implements Serializable {
     private Integer Id;
     private String text;
 
+    public Message() {
+    }
+
     public Integer getId() {
         return Id;
     }

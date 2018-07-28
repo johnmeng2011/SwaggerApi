@@ -5,12 +5,10 @@
  */
 package com.swagger.swaggerapi;
 
-import com.google.gson.Gson;
 import com.swagger.swaggerapi.task.BalanceTestResult;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,6 @@ import org.springframework.test.context.junit4.SpringRunner;
  *
  * @author Jun.Meng
  */
-@Ignore
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class ValidateBracketsTest {
@@ -33,33 +30,36 @@ public class ValidateBracketsTest {
 
     @Test
     public void DefaultTest() {
-        String body = this.restTemplate.getForObject("/tasks/validateBrackets", String.class);
-        Gson g = new Gson();
-        BalanceTestResult result = g.fromJson(body, BalanceTestResult.class);
+        BalanceTestResult result = this.restTemplate.getForObject("/tasks/validateBrackets", BalanceTestResult.class);
         assertThat(result.getInput()).isEqualTo("{[()]}");
         assertThat(result.getIsBalanced()).isEqualTo("true");
     }
-    
+
     @Test
-    
-    public void BalancedTest() throws UnsupportedEncodingException{
-        String underTest ="{{{[]()}[]}}";
+
+    public void BalancedTest() throws UnsupportedEncodingException {
+        String underTest = "{{{[]()}[]}}";
         String request = URLEncoder.encode(underTest, "UTF-8");
-        String body = this.restTemplate.getForObject("/tasks/validateBrackets?input="+request, String.class);
-        Gson g = new Gson();
-        BalanceTestResult result = g.fromJson(body, BalanceTestResult.class);
+        BalanceTestResult result = this.restTemplate.getForObject("/tasks/validateBrackets?input=" + request, BalanceTestResult.class);
         assertThat(result.getInput()).isEqualTo(underTest);
         assertThat(result.getIsBalanced()).isEqualTo("true");
     }
-    
+
     @Test
-    
-    public void UnBalancedTest() throws UnsupportedEncodingException{
-        String underTest ="{{{[]()}[(]}}";
+    public void UnBalancedTest() throws UnsupportedEncodingException {
+        String underTest = "{{{[]()}}}]";
         String request = URLEncoder.encode(underTest, "UTF-8");
-        String body = this.restTemplate.getForObject("/tasks/validateBrackets?input="+request, String.class);
-        Gson g = new Gson();
-        BalanceTestResult result = g.fromJson(body, BalanceTestResult.class);
+        BalanceTestResult result = this.restTemplate.getForObject("/tasks/validateBrackets?input=" + request, BalanceTestResult.class);
+
+        assertThat(result.getInput()).isEqualTo(underTest);
+        assertThat(result.getIsBalanced()).isEqualTo("false");
+    }
+
+    @Test
+    public void UnBalancedTestStartWithClosingChar() throws UnsupportedEncodingException {
+        String underTest = "]{{{[]()}}}]";
+        String request = URLEncoder.encode(underTest, "UTF-8");
+        BalanceTestResult result = this.restTemplate.getForObject("/tasks/validateBrackets?input=" + request, BalanceTestResult.class);
         assertThat(result.getInput()).isEqualTo(underTest);
         assertThat(result.getIsBalanced()).isEqualTo("false");
     }
