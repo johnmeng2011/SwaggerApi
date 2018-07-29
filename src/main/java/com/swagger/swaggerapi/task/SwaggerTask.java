@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SwaggerTask {
 
     @RequestMapping(value = "/tasks/validateBrackets")
-    public ResponseEntity validateBrackets(@RequestParam(name = "input", required = true, defaultValue = "{[()]}") String input) throws UnsupportedEncodingException {
+    public ResponseEntity validateBrackets(@RequestParam(name = "input", required = true, defaultValue = "") String input) throws UnsupportedEncodingException {
 
         input = URLDecoder.decode(input, "UTF-8");
         char[] tmp = input.toCharArray();
