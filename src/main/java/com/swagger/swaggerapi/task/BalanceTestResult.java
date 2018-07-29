@@ -11,21 +11,31 @@ package com.swagger.swaggerapi.task;
  */
 public class BalanceTestResult  {
     
-    private final String input;
-    private final String isBalanced;
+    private  String input;
+    private  boolean isBalanced;
+
+    public void setInput(String input) {
+        this.input = input;
+    }
+
+    public void setIsBalanced(boolean isBalanced) {
+        this.isBalanced = isBalanced;
+    }
+
+    public BalanceTestResult() {
+    }
 
     public String getInput() {
         return input;
     }
 
-    public String getIsBalanced() {
+    public boolean isIsBalanced() {
         return isBalanced;
     }
 
-
-    public BalanceTestResult(String input, String isBalanced) {
+    public BalanceTestResult(String input, boolean isBalanced) {
         this.input = input;
         this.isBalanced = isBalanced;
     }
-    
+        
 }

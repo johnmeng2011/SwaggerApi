@@ -87,10 +87,10 @@ public class SwaggerTask {
             isBalanced = false;
         }
         if (isBalanced) {
-            return new ResponseEntity(new BalanceTestResult(input, "true"), HttpStatus.OK);
+            return new ResponseEntity(new BalanceTestResult(input, true), HttpStatus.OK);
 
         } else {
-            return new ResponseEntity(new BalanceTestResult(input, "false"), HttpStatus.OK);
+            return new ResponseEntity(new BalanceTestResult(input, false), HttpStatus.OK);
 
         }
     }

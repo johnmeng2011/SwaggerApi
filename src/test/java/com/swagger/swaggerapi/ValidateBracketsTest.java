@@ -32,7 +32,7 @@ public class ValidateBracketsTest {
     public void DefaultTest() {
         BalanceTestResult result = this.restTemplate.getForObject("/tasks/validateBrackets", BalanceTestResult.class);
         assertThat(result.getInput()).isEqualTo("{[()]}");
-        assertThat(result.getIsBalanced()).isEqualTo("true");
+        assertThat(result.isIsBalanced()).isEqualTo(true);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class ValidateBracketsTest {
         String request = URLEncoder.encode(underTest, "UTF-8");
         BalanceTestResult result = this.restTemplate.getForObject("/tasks/validateBrackets?input=" + request, BalanceTestResult.class);
         assertThat(result.getInput()).isEqualTo(underTest);
-        assertThat(result.getIsBalanced()).isEqualTo("true");
+        assertThat(result.isIsBalanced()).isEqualTo(true);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class ValidateBracketsTest {
         BalanceTestResult result = this.restTemplate.getForObject("/tasks/validateBrackets?input=" + request, BalanceTestResult.class);
 
         assertThat(result.getInput()).isEqualTo(underTest);
-        assertThat(result.getIsBalanced()).isEqualTo("false");
+        assertThat(result.isIsBalanced()).isEqualTo(false);
     }
 
     @Test
@@ -61,6 +61,6 @@ public class ValidateBracketsTest {
         String request = URLEncoder.encode(underTest, "UTF-8");
         BalanceTestResult result = this.restTemplate.getForObject("/tasks/validateBrackets?input=" + request, BalanceTestResult.class);
         assertThat(result.getInput()).isEqualTo(underTest);
-        assertThat(result.getIsBalanced()).isEqualTo("false");
+        assertThat(result.isIsBalanced()).isEqualTo(false);
     }
 }
