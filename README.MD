@@ -20,11 +20,12 @@ the result of this brackets test all returned 400 Bad Request, I guess this is b
 Urlencoding. If sent with encoded brackets, I am confident they can success. 
 
 (2) /todo api
-
+_________________________________________________________________________
 POST: the posted JSON message should be in the format 
 {
   "text": "something"
 }
+
 
 the response should be either 
 {
@@ -49,9 +50,11 @@ or
 }
 
 when the message length is 0 or more than 50 chars. This has passed the integration test. 
+_________________________________________________________________________
 
 GET: format is /todo/{id}, should return the object if it exists in db, otherwise should return a NotFoundError, this has passed
 the integration test. However, if the id is too long, then the test will fail since it was defined as Integer and has a range limit. 
+_________________________________________________________________________
 
 PATCH: path is /todo/{id}, body should be in the format of this
 {
@@ -66,12 +69,14 @@ these have been tested on Postman and automated tests in the project.
 
 If text is not present, then the test will fail since there is no message to patch.
 
-4. I found the IntegrationTest provided by Auto&General failed on its own api in some cases, please try this 
+_________________________________________________________________________
+
+3. I found the IntegrationTest provided by Auto&General failed on its own api in some cases, please try this 
 http://join.autogeneral.com.au/test/1.0/integrationTest?url=http://join.autogeneral.com.au/test/1.0 
 and then review the test results. I can see some PATCH tests failed.
 
-3. Source code
+4. Source code
 Source code were edited in NetBeans and can be cloned and tested locally from Postman or automated tests included in TestPackage. 
 
-4. Please contact john.meng2011@gmail.com if there is any question.
+5. Please contact john.meng2011@gmail.com if there is any question.
 
