@@ -66,7 +66,12 @@ these have been tested on Postman and automated tests in the project.
 
 If text is not present, then the test will fail since there is no message to patch.
 
+4. I found the IntegrationTest provided by Auto&General failed on its own api in some cases, please try this 
+http://join.autogeneral.com.au/test/1.0/integrationTest?url=http://join.autogeneral.com.au/test/1.0 
+and then review the test results. I can see some PATCH tests failed.
+
 3. Source code
 Source code were edited in NetBeans and can be cloned and tested locally from Postman or automated tests included in TestPackage. 
 
 4. Please contact john.meng2011@gmail.com if there is any question.
+
