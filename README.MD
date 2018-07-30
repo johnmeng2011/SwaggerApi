@@ -3,6 +3,8 @@ The api endpint is http://18.221.14.82:8080/tasks/validateBrackets for validatin
 and http://18.221.14.82:8080/todo for testing the three REST methods GET/POST/PATCH
 The API has been deployed to a AWS EC2 instance. 
 
+_________________________________________________________________________
+
 2. Test
 
 (1) Validate Brackets
@@ -19,6 +21,8 @@ https://join.autogeneral.com.au/test/1.0/integrationTest?url=http://18.221.14.82
 
 the result of this brackets test all returned 400 Bad Request, I guess this is becasue the integration test directly send brackets without 
 Urlencoding. If sent with encoded brackets, I am confident they can success. 
+
+_________________________________________________________________________
 
 (2) /todo api
 _________________________________________________________________________
