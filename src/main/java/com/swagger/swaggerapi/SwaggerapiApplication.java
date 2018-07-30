@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SwaggerapiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SwaggerapiApplication.class, args);
+		 SpringApplication.run(SwaggerapiApplication.class, args);
 	}
 }
