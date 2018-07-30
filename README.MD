@@ -6,6 +6,7 @@ The API has been deployed to a AWS EC2 instance.
 2. Test
 
 (1) Validate Brackets
+
 To test the brackets balance, need to UrlEncode the input parameter, for example, "{[()]}" should be encoded to "%7B%5B%28%29%5D%7D". 
 Try this one http://18.221.14.82:8080/tasks/validateBrackets?input=%7B%5B%28%29%5D%7D and you can get a isBalanced=true response. If
 not url encoded, the test will return 400 Bad Request. 
