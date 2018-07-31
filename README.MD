@@ -10,8 +10,9 @@ _________________________________________________________________________
 (1) Validate Brackets
 
 To test the brackets balance, need to UrlEncode the input parameter, for example, "{[()]}" should be encoded to "%7B%5B%28%29%5D%7D". 
-Try this one http://18.221.14.82:8080/tasks/validateBrackets?input=%7B%5B%28%29%5D%7D and you can get a isBalanced=true response. If
-not url encoded, the test will return 400 Bad Request. 
+Try this one http://18.221.14.82:8080/tasks/validateBrackets?input=%7B%5B%28%29%5D%7D and you can get a isBalanced=true response. 
+Another one can be http://18.221.14.82:8080/tasks/validateBrackets?input=%5B%7B%28%29%28%29%7D%28%7B%5B%5D%7D%29%5D%28%7B%7D%5B%28%7B%7D%29%5D%29%28%28%28%28%28%28%28%29%5B%5D%29%29%7B%7D%29%29%5B%5D%7B%7B%7B%28%7B%28%7B%28%7B%7B%7B%7B%7B%7B%7D%7D%7D%7D%7D%7D%29%7D%29%7D%29%7D%7D%7D%29%29%5B%5D%5B%5D, which should return a balanced result.
+If not url encoded, the test will return 400 Bad Request. 
 
 The integration test endpoint provided by Auto&General can allow brackets without encoding, I am interested to know how it was achieved, 
 as from my understanding, special characters have to be encoded before they can be passed in url parameter. 
