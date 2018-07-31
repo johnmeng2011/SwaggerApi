@@ -6,6 +6,7 @@
 package com.swagger.swaggerapi;
 
 import com.swagger.swaggerapi.task.BalanceTestResult;
+import com.swagger.swaggerapi.task.ItemValidationError;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,18 +22,18 @@ import org.springframework.test.context.junit4.SpringRunner;
  *
  * @author Jun.Meng
  */
+
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class ValidateBracketsTest {
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+public class ValidateBracketsTest{
 
     @Autowired
     private TestRestTemplate restTemplate;
 
     @Test
     public void DefaultTest() {
-        BalanceTestResult result = this.restTemplate.getForObject("/tasks/validateBrackets", BalanceTestResult.class);
-        assertThat(result.getInput()).isEqualTo("{[()]}");
-        assertThat(result.isIsBalanced()).isEqualTo(true);
+        ItemValidationError result = this.restTemplate.getForObject("/tasks/validateBrackets", ItemValidationError.class);
+        assertThat(result.getName()).isEqualTo("ValidationError");
     }
 
     @Test
