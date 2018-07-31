@@ -76,7 +76,7 @@ a NotFoundError
 
 these have been tested on Postman and automated tests in the project. 
 
-If text is not present, then the test will fail since there is no message to patch.
+If text is not present, then return the unchanged record if it exists.
 
 _________________________________________________________________________
 
